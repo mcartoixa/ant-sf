@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+Copyright 2024 Mathieu Cartoixa.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us">
+  <head>
+    <title>project-deploy-start Task</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+  </head>
+
+  <body>
+    <h2>project-deploy-start Task</h2>
+
+    <h3>Description</h3>
+    <p>Deploy metadata to an org from your local project..</p>
+    <p>It executes the <a href="developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference_project_commands_unified.htm#cli_reference_project_deploy_start_unified" target="_blank">project deploy start</a> command.</p>
+
+    <h3>Parameters</h3>
+    <p>In addition to <a href="common.html">the attributes used by every ant-sf task</a>, this task uses the following attributes:</p>
+    <table class="attr">
+      <thead>
+        <tr>
+          <th scope="col">Attribute</th>
+          <th scope="col">Command line equivalent</th>
+          <th scope="col">Description</th>
+          <th scope="col">Required</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>dryrun</td>
+          <td>--dry-run</td>
+          <td>When set to <q>true</q>, validates the deployed metadata and runs all Apex tests but prevents the deployment from being saved to the org.</td>
+          <td>No; defaults to <q>false</q>.</td>
+        </tr>
+        <tr>
+          <td>ignoreconflicts</td>
+          <td>--ignore-conflicts</td>
+          <td>When set to <q>true</q>, ignore conflicts and deploy local files, even if they overwrite changes in the org.</td>
+          <td>No; defaults to <q>false</q>.</td>
+        </tr>
+        <tr>
+          <td>ignoreerrors</td>
+          <td>--ignore-errors</td>
+          <td>When set to <q>true</q>, ignore conflicts and deploy local files, even if they overwrite changes in the org.</td>
+          <td>No; defaults to <q>false</q>.</td>
+        </tr>
+        <tr>
+          <td>ignorewarnings</td>
+          <td>--ignore-warnings</td>
+          <td>When set to <q>true</q>, the success field in DeployMessage is true even if a warning occurs.
+            When set to <q>false</q> and a warning occurs success is set to false, and the warning is treated like an error.</td>
+          <td>No; defaults to <q>false</q>.</td>
+        </tr>
+        <tr>
+          <td>manifest</td>
+          <td>--manifest</td>
+          <td>The path for the manifest (package.xml) file that specifies the components to deploy.</td>
+          <td>No.</td>
+        </tr>
+        <tr>
+          <td>metadatadir</td>
+          <td>--metadata-dir</td>
+          <td>Root of directory or zip file of metadata formatted files to deploy.</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>purgeondelete</td>
+          <td>--purge-on-delete</td>
+          <td>When set to <q>true</q>, specifies that deleted components in the destructive changes manifest file are immediately eligible for deletion rather than being stored in the Recycle Bin.</td>
+          <td>No; defaults to <q>false</q>.</td>
+        </tr>
+        <tr>
+          <td>postdestructivechanges</td>
+          <td>--post-destructive-changes</td>
+          <td>Path for a manifest (destructiveChangesPost.xml) of components to delete after the deploy.</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>predestructivechanges</td>
+          <td>--pre-destructive-changes</td>
+          <td>Path for a manifest (destructiveChangesPre.xml) of components to delete before the deploy.</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>singlepackage</td>
+          <td>--single-package</td>
+          <td>When set to <q>true</q>, indicates that the metadata zip file points to a directory structure for a single package.</td>
+          <td>No; defaults to <q>false</q>.</td>
+        </tr>
+        <tr>
+          <td>sourcedir</td>
+          <td>--source-dir</td>
+          <td>The path to the local source file (or directory) to deploy.</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>targetorg</td>
+          <td>--target-org</td>
+          <td>A username or alias for the target org.</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>testlevel</td>
+          <td>--test-level</td>
+          <td>Specifies which tests to run. Acceptable values are:
+            <ul>
+              <li><q>RunAllTestsInOrg</q>: all tests in your org and in installed managed packages are run.</li>
+              <li><q>RunLocalTests</q>: all tests in your org are run, except the ones that originate from installed managed packages.</li>
+              <li><q>RunSpecifiedTests</q>: only the tests that you specify are run.</li>
+            </ul>
+          </td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>wait</td>
+          <td>--wait</td>
+          <td>Number of minutes to wait for command to complete and display results.</td>
+          <td>No; defaults to <q>33</q>.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Parameters specified as nested elements</h3>
+
+    <h4>metadata</h4>
+    <p>Specifies the name of a metadata component to deploy to the org.</p>
+
+    <h4>metadatadir</h4>
+    <p>The <var>metadatadir</var> attribute is a <a href="https://ant.apache.org/manual/using.html#path">path-like structure</a> and can also be set via a nested <code>&lt;metadatadir&gt;</code> element.</p>
+
+    <h4>sourcedir</h4>
+    <p>The <var>sourcedir</var> attribute is a <a href="https://ant.apache.org/manual/using.html#path">path-like structure</a> and can also be set via a nested <code>&lt;sourcedir&gt;</code> element.</p>
+
+    <h4>tests</h4>
+    <p>Apex tests to run when <var>testlevel</var> is RunSpecifiedTests.</p>
+
+    <h3>Examples</h3>
+    <pre>
+&lt;sf:project-deploy-start targetusername=&quot;scratchorg&quot; sourcedir=&quot;force-app/main/default/objects/Case&quot;&gt;
+  &lt;sourcedir&gt;
+    &lt;pathelement location=&quot;force-app/main/default/objects/Contact&quot; /&gt;
+    &lt;dirset dir=&quot;force-app/main/default/objects&quot;&gt;
+      &lt;include name=&quot;Ac*&quot; /&gt;
+    &lt;/dirset&gt;
+  &lt;/sourcedir&gt;
+&lt;/sf:project-deploy-start&gt;</pre>
+
+    <p class="center">Version: <span class="version-number">0.0.0-master</span></p>
+  </body>
+</html>

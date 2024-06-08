@@ -1,0 +1,18 @@
+{
+  "status": 0,
+  "result": {
+    "username": "test@ant-sf.org",
+    "devHubId": "test@ant-sf.org",
+    "id": "000000000000000000",
+    "createdBy": "test@ant-sf.org",
+    "createdDate": "2020-01-01T00:00:01.000+0000",
+    "expirationDate": "2020-12-31",
+    "status": "Active",
+    "edition": "Developer",
+    "orgName": "Ant SF",
+    "accessToken": "000000000000000!AAAAAAAAAAAAAAAAAAAAAAAAAAAA.222222222222222222222222222222222222222222222222_VVVVVVVVVVVVVVVVVV",
+    "instanceUrl": "https://ant-sf.my.salesforce.com/",
+    "clientId": "PlatformCLI",
+    "alias": "ant-sf"
+  }
+}

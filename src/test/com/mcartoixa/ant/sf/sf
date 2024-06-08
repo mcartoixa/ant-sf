@@ -1,0 +1,22 @@
+#!/bin/bash
+# Simulates the Salesforce CLI by outputting a json file corresponding to the supplied command parameter.
+# For instance sf org list  will output the content of org\list.json
+
+_CURRENT_DIR="$( cd "$( dirname "$0" )" && pwd )"
+_COMMAND_PARAMETER=$1
+_RESULT_FILE_PATH=$_CURRENT_DIR
+
+while [ $# -ge 1 ] && [ ! -f $_RESULT_FILE_PATH.json ]
+do
+    if [ "$1" == "import" ]; then
+        _ARG=imp
+    elif [ "$1" == "package" ]; then
+        _ARG=pkg;
+    else
+        _ARG=$1
+    fi
+    _RESULT_FILE_PATH=$_RESULT_FILE_PATH/$_ARG
+    shift
+done
+
+if [ -f $_RESULT_FILE_PATH.json ]; then cat $_RESULT_FILE_PATH.json; fi

@@ -19,6 +19,7 @@ package com.mcartoixa.ant.sfdx.force.apex.test;
  *
  * @author Mathieu Cartoixa
  */
+@SuppressWarnings("PMD.TestClassWithoutTestCases")
 public class TestNameWrapper {
 
     public TestNameWrapper() {

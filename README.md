@@ -1,15 +1,13 @@
-# ant-sfdx
-[![Build status](https://travis-ci.org/mcartoixa/ant-sfdx.svg?branch=master)](https://travis-ci.org/mcartoixa/ant-sfdx)
-[![Build Status](https://dev.azure.com/mcartoixa/ant-sfdx/_apis/build/status/ant-sfdx-CI)](https://dev.azure.com/mcartoixa/ant-sfdx/_build/latest?definitionId=1)
-[![Code coverage](https://codecov.io/gh/mcartoixa/ant-sfdx/branch/master/graph/badge.svg)](https://codecov.io/gh/mcartoixa/ant-sfdx)
-[![BCH compliance](https://bettercodehub.com/edge/badge/mcartoixa/ant-sfdx?branch=master)](https://bettercodehub.com/)
+# ant-sf
+[![Build status](https://github.com/mcartoixa/ant-sf/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/mcartoixa/ant-sf/actions/workflows/build.yml)
+[![Code coverage](https://codecov.io/gh/mcartoixa/ant-sf/branch/main/graph/badge.svg)](https://codecov.io/gh/mcartoixa/ant-sf)
 
-Ant tasks that encapsulate the Salesforce DX CLI
+Ant tasks that encapsulate [the Salesforce CLI](https://developer.salesforce.com/tools/salesforcecli).
 
 ## Rationale
 
-### The Salesforce DX CLI
-One of the promises of the Salesforce DX CLI is to allow easy Continuous Integration on Salesforce projects. There are many samples
+### The Salesforce CLI
+One of the promises of the Salesforce CLI is to allow easy Continuous Integration on Salesforce projects. There are many samples
 of how to achieve that on platforms like [CircleCI](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ci_circle.htm),
 [Jenkins](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ci_jenkins.htm)
 or [Travis CI](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ci_travis.htm).
@@ -35,16 +33,16 @@ But if you can handle it, this project allows you to:
   * with native JSON support in Ant [scripts](http://ant.apache.org/manual/Tasks/script.html) if necessary.
 * easily integrate third-party Java based tools like [PMD](https://pmd.github.io/) or [ApexDoc](https://github.com/SalesforceFoundation/ApexDoc).
 * read your build more easily (if you can accept [the angle bracket tax](https://blog.codinghorror.com/xml-the-angle-bracket-tax/)). What's more readable:
-  * `sfdx force:org:create -v HubOrg -s -f config/project-scratch-def.json -a ciorg --wait 2` ?
-  * or `<sfdx:force-org-create targetdevhubusername="HubOrg" defaultusername="true" definitionfile="config/project-scratch-def.json" alias="ciorg" wait="2" />` ?
+  * `sf org create scratch -v HubOrg -d -f config/project-scratch-def.json -a ciorg -w 2`?
+  * or `<sf:org-create-scratch targetdevhubusername="HubOrg" defaultusername="true" definitionfile="config/project-scratch-def.json" alias="ciorg" wait="2" />`?
 
 ## Usage
 
-The current documentation (`master` branch) for these tasks can be found at https://mcartoixa.github.io/ant-sfdx/. The documentation
-for any specific version can be downloaded [from the releases section](https://github.com/mcartoixa/ant-sfdx/releases) as an asset of
+The current documentation (`main` branch) for these tasks can be found at https://mcartoixa.github.io/ant-sf/. The documentation
+for any specific version can be downloaded [from the releases section](https://github.com/mcartoixa/ant-sf/releases) as an asset of
 the release in question.
 
-These tasks can be downloaded directly [from the releases section](https://github.com/mcartoixa/ant-sfdx/releases) or with
+These tasks can be downloaded directly [from the releases section](https://github.com/mcartoixa/ant-sf/releases) or with
 a dependency manager like [Apache Ivy](http://ant.apache.org/ivy/) (preferred). You will need the following settings in your
 `ivysettings.xml` file:
 ```xml
@@ -67,12 +65,10 @@ a dependency manager like [Apache Ivy](http://ant.apache.org/ivy/) (preferred). 
 ## Development
 
 ### Prerequisites
-* [Java SE Development Kit 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+* [Java SE Development Kit 11.0.20](https://www.oracle.com/java/technologies/downloads/#java11)
   * Ubuntu:
-    * `sudo add-apt-repository ppa:webupd8team/java`
-    * `sudo apt update`
-    * `sudo apt install oracle-java8-installer`
-    * Set the `JAVA_HOME` environment variable in your `~/.profile` file: `export JAVA_HOME="/usr/lib/jvm/java-8-oracle"`.
+    * [Follow the procedure](https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-22-04#option-2-installing-oracle-jdk-11).
+    * Set the `JAVA_HOME` environment variable in your `~/.profile` file: `export JAVA_HOME="/usr/lib/jvm/java-11-oracle/jre"`.
   * Windows:
     * Execute the installer.
 * Perl (unused on Windows) :
@@ -81,7 +77,7 @@ a dependency manager like [Apache Ivy](http://ant.apache.org/ivy/) (preferred). 
 
 Alternatively you can set your environment variables in a local `.env` file, e.g.:
 ```
-JAVA_HOME=/usr/lib/jvm/java-8-oracle
+JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 ```
 
 ### Build
@@ -96,6 +92,5 @@ The build script at the root of the project can be used to perform different tas
 * `./build.sh release`: `rebuild` + `package`.
 
 ### Environment
-* [NetBeans](https://netbeans.apache.org/download/index.html) 11.2:
-  * [EditorConfig plugin](https://github.com/welovecoding/editorconfig-netbeans)
+* [NetBeans](https://netbeans.apache.org/download/index.html) 20:
   * Execute the build script at least once before opening NetBeans.

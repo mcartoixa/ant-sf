@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="ConvertSourceTaskTest" basedir="." xmlns:sf="com.mcartoixa.ant.sf">
+  <condition property="sf-path" value="..\..\sf.cmd" else="../../sf">
+    <os family="dos" />
+  </condition>
+
+  <target name="init">
+    <taskdef uri="com.mcartoixa.ant.sf" resource="com/mcartoixa/ant/sf/antlib.xml" classpath="tmp/obj/classes" />
+  </target>
+
+  <target name="execute" depends="init">
+    <sf:project-convert-source rootdir="${basedir}" outputdir="ant-sf" packagename="testpackage" manifest="testmanifest" sourcedir="testsourcepath" statusproperty="execute.status" resultproperty="execute.result" executable="${sf-path}">
+      <metadata>TestComponent1</metadata>
+      <metadata>TestComponent2</metadata>
+    </sf:project-convert-source>
+  </target>
+
+  <target name="execute-quiet" depends="init">
+    <sf:project-convert-source quiet="true" executable="${sf-path}" />
+  </target>
+</project>

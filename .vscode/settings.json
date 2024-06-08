@@ -14,26 +14,5 @@
       "**/.vs/*/**": true,
       "**/ivy/*/**": true,
       "**/tmp/*/**": true
-    },
-    "terminal.integrated.shell.linux": "bash",
-    "terminal.integrated.shellArgs.linux": [
-        "--rcfile",
-        "build/.bashrc",
-        "-i"
-    ],
-    "terminal.integrated.shell.osx": "bash",
-    "terminal.integrated.shellArgs.osx": [
-        "--rcfile",
-        "build/.bashrc",
-        "-i",
-        "-c",
-        "/bin/zsh",
-        "-l"
-    ],
-    "terminal.integrated.shell.windows": "cmd.exe",
-    "terminal.integrated.shellArgs.windows": [
-        "/V:ON",
-        "/K",
-        "build\\SetEnv.bat"
-    ]
+    }
 }

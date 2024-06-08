@@ -41,6 +41,7 @@ import org.xml.sax.SAXException;
  *
  * @author Mathieu Cartoixa
  */
+@SuppressWarnings("PMD.GodClass")
 public class RunTask extends SfdxTask {
 
     /* default */ class JsonParser extends SfdxTask.JsonParser {
@@ -118,7 +119,7 @@ public class RunTask extends SfdxTask {
         }
     }
 
-    private static class TempDirectoryHelper {
+    private final static class TempDirectoryHelper {
 
         private TempDirectoryHelper() {
         }

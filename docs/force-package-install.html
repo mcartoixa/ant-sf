@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!--
-Copyright 2018 Mathieu Cartoixa.
+Copyright 2024 Mathieu Cartoixa.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -17,19 +17,19 @@ limitations under the License.
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-us">
   <head>
-    <title>force-package-install Task</title>
+    <title>package-install Task</title>
     <link rel="stylesheet" type="text/css" href="css/index.css" />
   </head>
 
   <body>
-    <h2>force-package-install Task</h2>
+    <h2>package-install Task</h2>
 
     <h3>Description</h3>
     <p>Installs a package in the target org.</p>
-    <p>It executes the <a href="https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference_force_package.htm#cli_reference_force_package" target="_blank">force:package:install</a> command.</p>
+    <p>It executes the <a href="developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference_package_commands_unified.htm#cli_reference_package_install_unified" target="_blank">package install</a> command.</p>
 
     <h3>Parameters</h3>
-    <p>In addition to <a href="common.html">the attributes used by every ant-sfdx task</a>, this task uses the following attributes:</p>
+    <p>In addition to <a href="common.html">the attributes used by every ant-sf task</a>, this task uses the following attributes:</p>
     <table class="attr">
       <thead>
         <tr>
@@ -42,7 +42,7 @@ limitations under the License.
       <tbody>
         <tr>
           <td>installationkey</td>
-          <td>-k</td>
+          <td>--installation-key</td>
           <td>Installation key for installing a key-protected package.</td>
           <td>No</td>
         </tr>
@@ -54,19 +54,19 @@ limitations under the License.
         </tr>
         <tr>
           <td>publishwait</td>
-          <td>--publishwait</td>
+          <td>--publish-wait</td>
           <td>Maximum number of minutes to wait for the subscriber package version ID to become available in the target org before canceling the installation request.</td>
           <td>No</td>
         </tr>
         <tr>
-          <td>targetusername</td>
-          <td>-u</td>
+          <td>targetorg</td>
+          <td>--target-org</td>
           <td>A username or alias for the target org.</td>
           <td>No</td>
         </tr>
         <tr>
           <td>wait</td>
-          <td>-w</td>
+          <td>--wait</td>
           <td>Maximum number of minutes to wait for installation status.</td>
           <td>No</td>
         </tr>

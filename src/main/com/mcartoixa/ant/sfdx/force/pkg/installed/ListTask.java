@@ -31,7 +31,7 @@ public class ListTask extends SfdxTask {
             super();
         }
 
-        @SuppressWarnings("PMD.CollapsibleIfStatements")
+        @SuppressWarnings({"PMD.AvoidLiteralsInIfCondition", "PMD.CollapsibleIfStatements"})
         @Override
         protected void handleValue(final String property, final String key, final String value) {
             super.handleValue(property, key, value);

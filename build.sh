@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source build/.bashrc
+source .build/setenv.sh
 
 
 
@@ -49,7 +49,7 @@ done
 
 # Ivy
 if [ ! -d ivy ]; then mkdir ivy; fi
-if [ ! -f ivy/ivy.jar ]; then wget -nv  --show-progress -O ivy/ivy.jar https://repo1.maven.org/maven2/org/apache/ivy/ivy/$_IVY_VERSION/ivy-$_IVY_VERSION.jar; fi
+if [ ! -f ivy/ivy.jar ]; then wget -nv --show-progress -O ivy/ivy.jar https://repo1.maven.org/maven2/org/apache/ivy/ivy/$_IVY_VERSION/ivy-$_IVY_VERSION.jar; fi
 if [ $? -ne 0 ]; then
     failed
 fi

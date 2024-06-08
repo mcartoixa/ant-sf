@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+Copyright 2024 Mathieu Cartoixa.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us">
+  <head>
+    <title>org-create-scratch Task</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+  </head>
+
+  <body>
+    <h2>org-create-scratch Task</h2>
+
+    <h3>Description</h3>
+    <p>Creates a scratch org.</p>
+    <p>It executes the <a href="developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference_org_commands_unified.htm#cli_reference_org_create_scratch_unified" target="_blank">org create scratch</a> command.</p>
+
+    <h3>Parameters</h3>
+    <p>In addition to <a href="common.html">the attributes used by every ant-sf task</a>, this task uses the following attributes:</p>
+    <table class="attr">
+      <thead>
+        <tr>
+          <th scope="col">Attribute</th>
+          <th scope="col">Command line equivalent</th>
+          <th scope="col">Description</th>
+          <th scope="col">Required</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>alias</td>
+          <td>--alias</td>
+          <td>An alias for the created scratch org.</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>clientid</td>
+          <td>--client-id</td>
+          <td>Consumer key of the Dev Hub connected app.</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>default</td>
+          <td>--set-default</td>
+          <td>If <q>true</q>, set the created org as the default org.</td>
+          <td>No; defaults to <q>false</q></td>
+        </tr>
+        <tr>
+          <td>definitionfile</td>
+          <td>--definition-file</td>
+          <td>A scratch org definition file.</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>durationdays</td>
+          <td>--duration-days</td>
+          <td>Sets the duration of the scratch org, in days. Valid values are from 1-30.</td>
+          <td>No; defaults to <q>7</q></td>
+        </tr>
+        <tr>
+          <td>noancestors</td>
+          <td>--no-ancestors</td>
+          <td>If <q>true</q>, do not include second-generation package (2GP) ancestors in the scratch org.</td>
+          <td>No; defaults to <q>false</q></td>
+        </tr>
+        <tr>
+          <td>nonamespace</td>
+          <td>--no-namespace</td>
+          <td>If <q>true</q>, creates the scratch org with no namespace. Useful when using a scratch org to test installations of packages with namespaces.</td>
+          <td>No; defaults to <q>false</q></td>
+        </tr>
+        <tr>
+          <td>notracksource</td>
+          <td>--no-track-source</td>
+          <td>If <q>true</q>, creates the scratch org with no source tracking. Useful in CI/CD jobs when you probably don't want to incur the costs of source tracking (checking for conflicts, polling the SourceMember object, various file system operations).</td>
+          <td>No; defaults to <q>false</q></td>
+        </tr>
+        <tr>
+          <td>orgadminemail</td>
+          <td>--admin-email</td>
+          <td>Email address that will be applied to the org's admin user. Overrides the value of the "adminEmail" option in the definition file, if set.</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>orgdescription</td>
+          <td>--description</td>
+          <td>Description of the scratch org in the Dev Hub. Overrides the value of the "description" option in the definition file, if set.</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>orgedition</td>
+          <td>--edition</td>
+          <td>Specifies the type of org to create. Acceptable values are:
+            <ul>
+              <li><q>Developer</q></li>
+              <li><q>Enterprise</q></li>
+              <li><q>Group</q></li>
+              <li><q>Professional</q></li>
+              <li><q>PartnerDeveloper</q></li>
+              <li><q>PartnerEnterprise</q></li>
+              <li><q>PartnerGroup</q></li>
+              <li><q>PartnerProfessional</q></li>
+            </ul>
+          </td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>orgname</td>
+          <td>--name</td>
+          <td>Name of the org, such as "Acme Company". Overrides the value of the "orgName" option in the definition file, if set.</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>orgrelease</td>
+          <td>--release</td>
+          <td>
+            <p>Release of the scratch org as compared to the Dev Hub release.</p>
+            <p>By default, scratch orgs are on the same release as the Dev Hub. During Salesforce release transition periods, you can override this default behavior and opt in or out of the new release.</p>
+            <p>Acceptable values are:</p>
+            <ul>
+              <li><q>Preview</q></li>
+              <li><q>Previous</q></li>
+            </ul>
+          </td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>orgsourceorg</td>
+          <td>--source-org</td>
+          <td>15-character ID of the org whose shape the new scratch org will be based on. Overrides the value of the "sourceOrg" option in the definition file, if set.</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>orgusername</td>
+          <td>--username</td>
+          <td>
+              <p>Username of the scratch org admin user. Overrides the value of the "username" option in the definition file, if set.</p>
+              <p>The username must be unique within the entire scratch org and sandbox universe. You must add your own logic to ensure uniqueness.</p>
+          </td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>targetdevhub</td>
+          <td>--target-dev-hub</td>
+          <td>A username or alias for the target Dev Hub org.</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>wait</td>
+          <td>-w</td>
+          <td>Sets the streaming client socket timeout, in minutes. If the streaming client socket has no contact from the server for a number of minutes, the client exits. Specify a longer wait time if timeouts occur frequently.</td>
+          <td>No; defaults to <q>5</q></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="center">Version: <span class="version-number">0.0.0-master</span></p>
+  </body>
+</html>

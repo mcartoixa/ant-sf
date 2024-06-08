@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- cf. https://pmd.github.io/pmd-6.3.0/pmd_userdocs_making_rulesets.html -->
+<!-- cf. https://docs.pmd-code.org/latest/pmd_userdocs_making_rulesets.html -->
 <ruleset name="PMD Rules"
          xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -10,6 +10,8 @@
   <rule ref="category/java/bestpractices.xml" />
   <rule ref="category/java/codestyle.xml">
     <exclude name="BooleanGetMethodName" />
+    <!-- False positives... -->
+    <exclude name="CommentDefaultAccessModifier" />
     <exclude name="FieldDeclarationsShouldBeAtStartOfClass" />
     <exclude name="ShortVariable" />
     <exclude name="UnnecessaryConstructor" />
@@ -21,6 +23,11 @@
     <exclude name="LawOfDemeter" />
     <exclude name="LoosePackageCoupling" />
     <exclude name="NcssCount" />
+  </rule>
+  <rule ref="category/java/design.xml/CognitiveComplexity">
+    <properties>
+      <property name="reportLevel" value="50" />
+    </properties>
   </rule>
   <rule ref="category/java/errorprone.xml">
     <exclude name="AvoidDuplicateLiterals" />

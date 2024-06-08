@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="TreeTaskTest" basedir="." xmlns:sf="com.mcartoixa.ant.sf">
+  <condition property="sf-path" value="..\..\sf.cmd" else="../../sf">
+    <os family="dos" />
+  </condition>
+
+  <target name="init">
+    <taskdef uri="com.mcartoixa.ant.sf" resource="com/mcartoixa/ant/sf/antlib.xml" classpath="tmp/obj/classes" />
+
+    <filelist id="datafiles" files="testdata.json" />
+  </target>
+
+
+  <target name="execute" depends="init">
+    <sf:data-import-tree targetorg="testorganization" statusproperty="execute.status" resultproperty="execute.result"  executable="${sf-path}">
+      <filelist refid="datafiles" />
+    </sf:data-import-tree>
+  </target>
+
+  <target name="execute-quiet" depends="init">
+    <sf:data-import-tree quiet="true" executable="${sf-path}">
+      <filelist refid="datafiles" />
+    </sf:data-import-tree>
+  </target>
+</project>

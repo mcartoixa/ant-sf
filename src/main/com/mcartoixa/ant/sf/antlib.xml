@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<antlib>
+  <taskdef name="apex-run" classname="com.mcartoixa.ant.sf.apex.RunTask" />
+  <taskdef name="apex-run-test" classname="com.mcartoixa.ant.sf.apex.run.RunTestTask" />
+  <taskdef name="data-create-record" classname="com.mcartoixa.ant.sf.data.create.CreateRecordTask" />
+  <taskdef name="data-import-tree" classname="com.mcartoixa.ant.sf.data.imp.ImportTreeTask" />
+  <taskdef name="org-create-scratch" classname="com.mcartoixa.ant.sf.org.create.CreateScratchTask" />
+  <taskdef name="org-delete-scratch" classname="com.mcartoixa.ant.sf.org.delete.DeleteScratchTask" />
+  <taskdef name="org-display" classname="com.mcartoixa.ant.sf.org.DisplayTask" />
+  <taskdef name="org-list" classname="com.mcartoixa.ant.sf.org.ListTask" />
+  <taskdef name="org-list-metadatatypes" classname="com.mcartoixa.ant.sf.org.list.ListMetadataTypesTask" />
+  <taskdef name="package-install" classname="com.mcartoixa.ant.sf.pkg.InstallTask" />
+  <taskdef name="package-installed-list" classname="com.mcartoixa.ant.sf.pkg.installed.ListTask" />
+  <taskdef name="project-convert-source" classname="com.mcartoixa.ant.sf.project.convert.ConvertSourceTask" />
+  <taskdef name="project-deploy-start" classname="com.mcartoixa.ant.sf.project.deploy.StartTask" />
+</antlib>

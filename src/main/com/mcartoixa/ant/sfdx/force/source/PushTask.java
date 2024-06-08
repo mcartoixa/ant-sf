@@ -44,7 +44,7 @@ public class PushTask extends SfdxTask {
                     if (value instanceof JSONObject) {
                         final JSONObject object = (JSONObject) value;
                         final String filePath = object.optString("filePath");
-                        if (filePath == null || filePath.isEmpty() || filePath.equals("N/A")) {
+                        if (filePath == null || filePath.isEmpty() || "N/A".equals(filePath)) {
                             this.log(object.getString("error"), Project.MSG_ERR);
                         } else {
                             final String lineNumber = object.optString("lineNumber");
