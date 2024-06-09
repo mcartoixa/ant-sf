@@ -1,6 +1,6 @@
 # ant-sf
 [![Build status](https://github.com/mcartoixa/ant-sf/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/mcartoixa/ant-sf/actions/workflows/build.yml)
-[![Code coverage](https://codecov.io/gh/mcartoixa/ant-sf/branch/main/graph/badge.svg)](https://codecov.io/gh/mcartoixa/ant-sf)
+[![Code coverage](https://codecov.io/github/mcartoixa/ant-sf/graph/badge.svg?token=EtwTskQ89A)](https://codecov.io/github/mcartoixa/ant-sf)
 
 Ant tasks that encapsulate [the Salesforce CLI](https://developer.salesforce.com/tools/salesforcecli).
 
