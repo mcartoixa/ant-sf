@@ -13,7 +13,7 @@
 
 
   <target name="execute" depends="init">
-    <sf:data-import-tree targetorg="testorganization" statusproperty="execute.status" resultproperty="execute.result"  executable="${sf-path}">
+    <sf:data-import-tree targetorg="testorganization" referencesproperty="execute.references" statusproperty="execute.status" resultproperty="execute.result"  executable="${sf-path}">
       <filelist refid="datafiles" />
     </sf:data-import-tree>
   </target>

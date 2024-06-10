@@ -23,6 +23,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.Project;
@@ -58,9 +59,17 @@ public class ImportTreeTask extends SfTask {
                     final Object value = result.get(i);
                     if (value instanceof JSONObject) {
                         final JSONObject object = (JSONObject) value;
+                        final String refId = object.getString("refId");
+                        final String id = object.getString("id");
+                        final String refProperty = ImportTreeTask.this.getReferencesProperty();
+                        if (refProperty != null && !refProperty.isEmpty()) {
+                            ImportTreeTask.this.getProject().setNewProperty(refProperty + "." + refId.toLowerCase(Locale.ROOT), id);
+                        }
+
                         final String message = String.format(
-                                "%s imported.",
-                                object.getString("refId")
+                                "%s imported (%s).",
+                                refId,
+                                id
                         );
                         this.log(message, Project.MSG_INFO);
                     }
@@ -151,6 +160,10 @@ public class ImportTreeTask extends SfTask {
         }
     }
 
+    public void setReferencesProperty(final String refProperty) {
+        this.refProperty = refProperty;
+    }
+
     public void setTargetOrg(final String organization) {
         if (organization != null && !organization.isEmpty()) {
             getCommandline().createArgument().setValue("--target-org");
@@ -210,6 +223,12 @@ public class ImportTreeTask extends SfTask {
         return new ImportTreeTask.JsonParser();
     }
 
+    @SuppressWarnings("PMD.DefaultPackage")
+    /* default */ String getReferencesProperty() {
+        return this.refProperty;
+    }
+
     private transient final List<FileSet> fileSets = new ArrayList<>();
+    private transient String refProperty;
     private transient Union resources = null;
 }

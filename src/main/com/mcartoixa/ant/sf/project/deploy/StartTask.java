@@ -199,10 +199,10 @@ public class StartTask extends SfTask {
 
     }
 
-    public void setTargetUserName(final String userName) {
-        if (userName != null && !userName.isEmpty()) {
-            getCommandline().createArgument().setValue("-u");
-            getCommandline().createArgument().setValue(userName);
+    public void setTargetOrg(final String organization) {
+        if (organization != null && !organization.isEmpty()) {
+            getCommandline().createArgument().setValue("--target-org");
+            getCommandline().createArgument().setValue(organization);
         }
     }
 

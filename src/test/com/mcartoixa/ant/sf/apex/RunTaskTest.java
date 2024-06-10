@@ -59,7 +59,7 @@ public class RunTaskTest {
     @Test
     public void executeShouldAddFileArgument() {
         buildRule.executeTarget("execute");
-        Assert.assertTrue("Full log should contain --file argument", buildRule.getFullLog().contains("'--file" + new File(buildRule.getProject().getBaseDir(), "testfile").getAbsolutePath() + "'"));
+        Assert.assertTrue("Full log should contain --file argument", buildRule.getFullLog().contains("'--file'" + System.lineSeparator() + "'" + new File(buildRule.getProject().getBaseDir(), "testfile").getAbsolutePath() + "'"));
     }
 
     @Test

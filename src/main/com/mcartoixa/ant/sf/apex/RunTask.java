@@ -23,7 +23,6 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.Locale;
 import org.apache.tools.ant.Project;
-import org.apache.tools.ant.types.Commandline;
 import org.json.JSONObject;
 
 /**
@@ -107,9 +106,8 @@ public class RunTask extends SfTask {
         this.file = file;
 
         if (file != null) {
-            final Commandline.Argument arg = getCommandline().createArgument();
-            arg.setPrefix("--file");
-            arg.setFile(file);
+            getCommandline().createArgument().setValue("--file");
+            getCommandline().createArgument().setFile(file);
         }
     }
 
