@@ -42,8 +42,61 @@ public class StartTask extends SfTask {
             super();
         }
 
+        @SuppressWarnings({"PMD.CognitiveComplexity", "PMD.NPathComplexity"})
         @Override
         protected void doParse(final JSONObject json) {
+            if (!StartTask.this.getQuiet()) {
+                final JSONObject result = json.optJSONObject("result");
+                if (result != null) {
+                    final JSONArray files = result.optJSONArray("files");
+                    if (files != null) {
+                        for (int i = 0; i < files.length(); i++) {
+                            final Object value = files.get(i);
+                            if (value instanceof JSONObject) {
+                                final JSONObject object = (JSONObject)value;
+                                final String filePath = object.optString("filePath");
+                                final String state = object.getString("state");
+                                switch (state) {
+                                    case "Created":
+                                    case "Changed":
+                                        final String ms = String.format(
+                                                "%s %s %s",
+                                                state,
+                                                object.getString("type"),
+                                                object.getString("fullName")
+                                        );
+                                        this.log(ms, Project.MSG_VERBOSE);
+                                        break;
+                                    case "Failed":
+                                        final String lineNumber = object.optString("lineNumber");
+                                        final String me = String.format(
+                                                "%s:%s: %s %s: %s",
+                                                new File(filePath).getAbsolutePath(),
+                                                lineNumber == null || lineNumber.isEmpty() ? "0" : lineNumber,
+                                                object.getString("type"),
+                                                object.getString("problemType"),
+                                                object.getString("error")
+                                        );
+                                        this.log(me, Project.MSG_ERR);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                        }
+                    }
+
+                    this.log(
+                        String.format(
+                            "Components deployed: %d, Failed: %d",
+                            result.optInt("numberComponentsDeployed", 0),
+                            result.optInt("numberComponentsFailed", 0)
+                        ),
+                        Project.MSG_INFO
+                    );
+                }
+            }
+
             final JSONArray result = json.optJSONArray("result");
             if (result != null) {
                 for (int i = 0; i < result.length(); i++) {
@@ -89,6 +142,28 @@ public class StartTask extends SfTask {
             }
 
             super.doParse(json);
+        }
+
+        @Override
+        protected void handleValue(final String property, final String key, final String value) {
+            super.handleValue(property, key, value);
+
+            if (!StartTask.this.getQuiet()) {
+                switch (key) {
+                    case "numberComponentsDeployed":
+                        if (!"0".equals(value)) {
+                            this.log("Components deployed: " + value + ".", Project.MSG_INFO);
+                        }
+                        break;
+                    case "numberComponentErrors":
+                        if (!"0".equals(value)) {
+                            this.log("Components in error: " + value + ".", Project.MSG_INFO);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
     }
 

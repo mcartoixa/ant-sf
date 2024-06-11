@@ -4,6 +4,7 @@
   <taskdef name="apex-run-test" classname="com.mcartoixa.ant.sf.apex.run.RunTestTask" />
   <taskdef name="data-create-record" classname="com.mcartoixa.ant.sf.data.create.CreateRecordTask" />
   <taskdef name="data-import-tree" classname="com.mcartoixa.ant.sf.data.imp.ImportTreeTask" />
+  <taskdef name="data-upsert-bulk" classname="com.mcartoixa.ant.sf.data.upsert.UpsertBulkTask" />
   <taskdef name="org-create-scratch" classname="com.mcartoixa.ant.sf.org.create.CreateScratchTask" />
   <taskdef name="org-create-user" classname="com.mcartoixa.ant.sf.org.create.CreateUserTask" />
   <taskdef name="org-delete-scratch" classname="com.mcartoixa.ant.sf.org.delete.DeleteScratchTask" />

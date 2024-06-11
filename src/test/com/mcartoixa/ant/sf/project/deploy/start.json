@@ -1,0 +1,104 @@
+{
+  "result":{
+    "createdByName":"Admin User",
+    "numberComponentsTotal":2,
+    "numberTestErrors":0,
+    "ignoreWarnings":true,
+    "lastModifiedDate":"2024-06-12T08:32:13.000Z",
+    "checkOnly":false,
+    "done":true,
+    "completedDate":"2024-06-12T08:32:13.000Z",
+    "numberComponentErrors":0,
+    "numberTestsTotal":0,
+    "createdDate":"2024-06-12T08:32:11.000Z",
+    "createdBy":"005Aa00000AiLZR",
+    "rollbackOnError":true,
+    "numberTestsCompleted":0,
+    "success":true,
+    "runTestsEnabled":false,
+    "files":[
+      {
+        "filePath":"C:\\ant-sf\\force-app\\main\\default\\classes\\AntSfUtil.cls",
+        "fullName":"AntSfUtil",
+        "state":"Changed",
+        "type":"ApexClass"
+      },
+      {
+        "filePath":"C:\\ant-sf\\force-app\\main\\default\\classes\\AntSfUtil.cls-meta.xml",
+        "fullName":"AntSfUtil",
+        "state":"Changed",
+        "type":"ApexClass"
+      }
+    ],
+    "details":{
+      "componentSuccesses":[
+        {
+          "componentType":"ApexClass",
+          "fileName":"classes/AntSfUtil.cls",
+          "createdDate":"2024-06-12T08:32:12.000Z",
+          "deleted":false,
+          "created":false,
+          "success":true,
+          "fullName":"AirportUtil",
+          "id":"00000000000000000K",
+          "changed":true
+        },
+        {
+          "componentType":"GlobalValueSet",
+          "fileName":"globalValueSets/AntSfStatus.globalValueSet",
+          "createdDate":"2024-06-12T08:32:13.000Z",
+          "deleted":false,
+          "created":false,
+          "success":true,
+          "fullName":"JointActionStatus__gvs",
+          "id":"00000000000000000A",
+          "changed":true
+        },
+        {
+          "componentType":"",
+          "fileName":"package.xml",
+          "createdDate":"2024-06-12T08:32:13.000Z",
+          "deleted":false,
+          "created":false,
+          "success":true,
+          "fullName":"package.xml",
+          "changed":true
+        }
+      ],
+      "runTestResult":{
+        "numFailures":0,
+        "codeCoverageWarnings":[
+          
+        ],
+        "failures":[
+          
+        ],
+        "successes":[
+          
+        ],
+        "numTestsRun":0,
+        "totalTime":0,
+        "flowCoverageWarnings":[
+          
+        ],
+        "codeCoverage":[
+          
+        ],
+        "flowCoverage":[
+          
+        ]
+      },
+      "componentFailures":[
+        
+      ]
+    },
+    "numberComponentsDeployed":2,
+    "id":"000000000000000001",
+    "startDate":"2024-06-12T08:32:12.000Z",
+    "status":"Succeeded"
+  },
+  "warnings":[
+    "GlobalValueSet, AntSfStatus__gvs, returned from org, but not found in the local project"
+  ],
+  "status":0
+}

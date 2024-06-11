@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mcartoixa.ant.sf.data.imp;
+package com.mcartoixa.ant.sf.project.deploy;
 
 import org.apache.tools.ant.BuildFileRule;
 import org.apache.tools.ant.Project;
@@ -27,7 +27,7 @@ import org.junit.rules.ExpectedException;
  *
  * @author Mathieu Cartoixa
  */
-public class ImportTreeTaskTest {
+public class StartTaskTest {
 
     @Rule
     public final BuildFileRule buildRule = new BuildFileRule();
@@ -35,24 +35,18 @@ public class ImportTreeTaskTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    public ImportTreeTaskTest() {
+    public StartTaskTest() {
     }
 
     @Before
     public void setUp() {
-        buildRule.configureProject("src/test/com/mcartoixa/ant/sf/data/imp/tree.xml", Project.MSG_DEBUG);
+        buildRule.configureProject("src/test/com/mcartoixa/ant/sf/project/deploy/start.xml", Project.MSG_DEBUG);
     }
 
     @Test
     public void executeShouldSetStatusProperty() {
         buildRule.executeTarget("execute");
         Assert.assertEquals("Status property should be set", "0", buildRule.getProject().getProperty("execute.status"));
-    }
-
-    @Test
-    public void executeShouldSetReferencesProperties() {
-        buildRule.executeTarget("execute");
-        Assert.assertEquals("References properties should be set", "a063N000004OhI8QAK", buildRule.getProject().getProperty("execute.references.object__cref2"));
     }
 
     @Test

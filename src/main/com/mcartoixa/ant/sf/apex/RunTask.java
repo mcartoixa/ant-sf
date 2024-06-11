@@ -37,30 +37,29 @@ public class RunTask extends SfTask {
             super();
         }
 
-        @SuppressWarnings({"PMD.AssignmentInOperand", "PMD.AvoidLiteralsInIfCondition", "PMD.CognitiveComplexity", "PMD.DataflowAnomalyAnalysis"})
+        @SuppressWarnings({"PMD.AssignmentInOperand", "PMD.AvoidLiteralsInIfCondition", "PMD.CognitiveComplexity", "PMD.DataflowAnomalyAnalysis", "PMD.NPathComplexity"})
         @Override
         protected void doParse(final JSONObject json) {
             super.doParse(json);
 
-            if (json != null) {
-                final JSONObject result = json.getJSONObject("result");
+            if (!RunTask.this.getQuiet() && json != null) {
+                JSONObject result = json.optJSONObject("data");
+                if (result == null) {
+                    result = json.getJSONObject("result");
+                }
                 if (result != null) {
                     if (!result.getBoolean("success")) {
-                        final String message = String.format(
-                                "%s:%d:%d: %s: %s",
+                        final String message = String.format("%s:%d:%d: %s: %s",
                                 getFile().getAbsolutePath(),
                                 result.optInt("line"),
                                 result.optInt("column"),
-                                result.getBoolean("compiled") ? "error" : "exception",
-                                result.optString("message")
+                                json.optString("name"),
+                                result.getBoolean("compiled") ? result.optString("compileProblem") : result.optString("exceptionMessage")
                         );
                         this.log(message, Project.MSG_ERR);
+
                         if (RunTask.this.getFailOnError()) {
-                            RunTask.this.setErrorMessage(
-                                    result.getBoolean("compiled")
-                                    ? "An error ocurred during APEX compilation."
-                                    : "An exception occurred dunring APEX execution."
-                            );
+                            RunTask.this.setErrorMessage(json.getString("message"));
                         }
                     }
 
@@ -76,10 +75,32 @@ public class RunTask extends SfTask {
                                 while ((line = br.readLine()) != null) {
                                     if (line.startsWith("Execute Anonymous:")) { continue; }
                                     final String[] elements = line.split("\\|");
-                                    if ((elements.length == 5) && "USER_DEBUG".equals(elements[1]) && "INFO".equals(elements[3]) && elements[4].startsWith("[property]")) {
-                                        final String[] p = elements[4].substring("[property]".length()).split("=", 2);
-                                        if (p.length == 2) {
-                                            RunTask.this.getProject().setNewProperty(logProperty + "." + p[0].trim().toLowerCase(Locale.ROOT), p[1].trim());
+                                    if ((elements.length == 5) && "USER_DEBUG".equals(elements[1])) {
+                                        if ("INFO".equals(elements[3]) && elements[4].startsWith("[property]")) {
+                                            final String[] p = elements[4].substring("[property]".length()).split("=", 2);
+                                            if (p.length == 2) {
+                                                RunTask.this.getProject().setNewProperty(logProperty + "." + p[0].trim().toLowerCase(Locale.ROOT), p[1].trim());
+                                            }
+                                        } else {
+                                            int level;
+                                            switch (elements[3]) {
+                                                case "ERROR":
+                                                    level = Project.MSG_ERR;
+                                                    break;
+                                                case "WARN":
+                                                    level = Project.MSG_WARN;
+                                                    break;
+                                                case "INFO":
+                                                    level = Project.MSG_INFO;
+                                                    break;
+                                                case "DEBUG":
+                                                    level = Project.MSG_VERBOSE;
+                                                    break;
+                                                default:
+                                                    level = Project.MSG_DEBUG;
+                                                    break;
+                                            }
+                                            this.log(elements[4], level);
                                         }
                                     }
                                 }
@@ -104,11 +125,6 @@ public class RunTask extends SfTask {
 
     public void setFile(final File file) {
         this.file = file;
-
-        if (file != null) {
-            getCommandline().createArgument().setValue("--file");
-            getCommandline().createArgument().setFile(file);
-        }
     }
 
     public void setLogProperty(final String logProperty) {
@@ -123,8 +139,26 @@ public class RunTask extends SfTask {
     }
 
     @Override
+    protected void createArguments() {
+        super.createArguments();
+
+        if (this.file != null) {
+            getCommandline().createArgument().setValue("--file");
+            getCommandline().createArgument().setFile(this.file);
+        }
+    }
+
+    @Override
     protected ISfJsonParser getParser() {
         return new RunTask.JsonParser();
+    }
+
+    @Override
+    protected void prepareContext() {
+        if (!this.getQuiet()) {
+            final String message = String.format("Executing script %s...", this.file.getName());
+            this.log(message, Project.MSG_INFO);
+        }
     }
 
     @SuppressWarnings("PMD.DefaultPackage")

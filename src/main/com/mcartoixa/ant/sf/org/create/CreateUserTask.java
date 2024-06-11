@@ -43,11 +43,13 @@ public class CreateUserTask extends SfTask {
             if (!CreateUserTask.this.getQuiet()) {
                 switch (key) {
                     case "id":
-                        this.log("User " + value + " created.", Project.MSG_INFO);
                         final String refProperty = CreateUserTask.this.getReferenceProperty();
                         if (refProperty != null && !refProperty.isEmpty()) {
                             CreateUserTask.this.getProject().setNewProperty(refProperty, value);
                         }
+                        break;
+                    case "username":
+                        this.log("User " + value + " created", Project.MSG_INFO);
                         break;
                     default:
                         break;

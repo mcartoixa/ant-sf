@@ -71,7 +71,7 @@ public class ImportTreeTask extends SfTask {
                                 refId,
                                 id
                         );
-                        this.log(message, Project.MSG_INFO);
+                        this.log(message, Project.MSG_VERBOSE);
                     }
                 }
             }
@@ -130,8 +130,8 @@ public class ImportTreeTask extends SfTask {
 
     @Override
     protected void checkConfiguration() {
-        if (this.fileSets.isEmpty() && this.resources == null) {
-            throw new BuildException("No resources specified", getLocation());
+        if (this.fileSets.isEmpty() && (this.resources == null) && (this.plan == null)) {
+            throw new BuildException("No resources or plan have been specified", getLocation());
         }
 
         super.checkConfiguration();
@@ -154,10 +154,7 @@ public class ImportTreeTask extends SfTask {
     }
 
     public void setPlan(final File plan) {
-        if (plan != null) {
-            getCommandline().createArgument().setValue("--plan");
-            getCommandline().createArgument().setValue(plan.getPath());
-        }
+        this.plan = plan;
     }
 
     public void setReferencesProperty(final String refProperty) {
@@ -171,7 +168,7 @@ public class ImportTreeTask extends SfTask {
         }
     }
 
-    @SuppressWarnings("PMD.DataflowAnomalyAnalysis")
+    @SuppressWarnings({"PMD.DataflowAnomalyAnalysis", "PMD.NPathComplexity"})
     @Override
     protected void createArguments() {
         final StringBuilder sobjecttreefiles = new StringBuilder();
@@ -214,6 +211,10 @@ public class ImportTreeTask extends SfTask {
             getCommandline().createArgument().setValue("--files");
             getCommandline().createArgument().setValue(sobjecttreefiles.toString());
         }
+        if (this.plan != null) {
+            getCommandline().createArgument().setValue("--plan");
+            getCommandline().createArgument().setValue(this.plan.getPath());
+        }
 
         super.createArguments();
     }
@@ -229,6 +230,7 @@ public class ImportTreeTask extends SfTask {
     }
 
     private transient final List<FileSet> fileSets = new ArrayList<>();
+    private transient File plan;
     private transient String refProperty;
     private transient Union resources = null;
 }

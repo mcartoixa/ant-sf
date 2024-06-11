@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="StartTaskTest" basedir="." xmlns:sf="com.mcartoixa.ant.sf">
+  <condition property="sf-path" value="..\..\sf.cmd" else="../../sf">
+    <os family="dos" />
+  </condition>
+
+  <target name="init">
+    <taskdef uri="com.mcartoixa.ant.sf" resource="com/mcartoixa/ant/sf/antlib.xml" classpath="tmp/obj/classes" />
+ </target>
+
+
+  <target name="execute" depends="init">
+    <sf:project-deploy-start targetorg="testorganization" sourcedir="C:\ant-sf" statusproperty="execute.status" resultproperty="execute.result" executable="${sf-path}" />
+  </target>
+
+  <target name="execute-quiet" depends="init">
+    <sf:project-deploy-start quiet="true" executable="${sf-path}" />
+  </target>
+</project>

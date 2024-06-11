@@ -11,7 +11,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      PACKAGE_VERSION: 2.0.${{ github.run_number }}
+      PACKAGE_VERSION: 2.1.${{ github.run_number }}
       SF_AUTOUPDATE_DISABLE: true
       SF_HIDE_RELEASE_NOTES: true
       SF_HIDE_RELEASE_NOTES_FOOTER: true
