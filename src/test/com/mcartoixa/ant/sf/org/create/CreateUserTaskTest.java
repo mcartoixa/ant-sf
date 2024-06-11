@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mcartoixa.ant.sf.data.create;
+package com.mcartoixa.ant.sf.org.create;
 
 import org.apache.tools.ant.BuildFileRule;
 import org.apache.tools.ant.Project;
@@ -27,7 +27,7 @@ import org.junit.rules.ExpectedException;
  *
  * @author Mathieu Cartoixa
  */
-public class CreateRecordTaskTest {
+public class CreateUserTaskTest {
 
     @Rule
     public final BuildFileRule buildRule = new BuildFileRule();
@@ -35,12 +35,12 @@ public class CreateRecordTaskTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    public CreateRecordTaskTest() {
+    public CreateUserTaskTest() {
     }
 
     @Before
     public void setUp() {
-        buildRule.configureProject("src/test/com/mcartoixa/ant/sf/data/create/record.xml", Project.MSG_DEBUG);
+        buildRule.configureProject("src/test/com/mcartoixa/ant/sf/org/create/user.xml", Project.MSG_DEBUG);
     }
 
     @Test
@@ -56,22 +56,21 @@ public class CreateRecordTaskTest {
     }
 
     @Test
-    public void executeShouldAddTargetorgArgument() {
+    public void executeShouldAddTargetdevhubArgument() {
         buildRule.executeTarget("execute");
         Assert.assertTrue("Full log should contain --target-org argument", buildRule.getFullLog().contains("'--target-org'" + System.lineSeparator() + "'testorganization'"));
     }
 
     @Test
-    public void executeShouldAddValuesArgument() {
+    public void executeShouldAddParamsArgument() {
         buildRule.executeTarget("execute");
-        Assert.assertTrue("Full log should contain --values argument", buildRule.getFullLog().contains("'--values'"));
-        Assert.assertTrue("Full log should contain FieldName=fieldValue argument value", buildRule.getFullLog().contains("'FieldName=\'fieldValue\''"));
+        Assert.assertTrue("Full log should contain ParamName=paramValue argument value", buildRule.getFullLog().contains("ParamName=paramValue"));
     }
 
     @Test
     public void executeShouldSetReferenceProperty() {
         buildRule.executeTarget("execute");
-        Assert.assertEquals("Reference property should be set", "000000000000000000", buildRule.getProject().getProperty("execute.reference"));
+        Assert.assertEquals("Reference property should be set", "00000000000000000V", buildRule.getProject().getProperty("execute.reference"));
     }
 
     @Test

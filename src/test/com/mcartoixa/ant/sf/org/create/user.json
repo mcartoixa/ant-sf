@@ -1,0 +1,20 @@
+{
+  "status": 0,
+  "result": {
+    "orgId": "00000000000000000A",
+    "permissionSetAssignments": [],
+    "fields": {
+      "id": "00000000000000000V",
+      "username": "username@ant-sf.org",
+      "alias": "user",
+      "email": "user@ant-sf.org",
+      "emailencodingkey": "ISO-8859-1",
+      "languagelocalekey": "en_US",
+      "localesidkey": "fr_FR_EURO",
+      "profileid": "000000000000000002",
+      "lastname": "User",
+      "timezonesidkey": "Europe/Paris"
+    }
+  },
+  "warnings": []
+}

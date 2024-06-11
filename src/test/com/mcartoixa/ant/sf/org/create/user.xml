@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="RecordTaskTest" basedir="." xmlns:sf="com.mcartoixa.ant.sf">
+<project name="CreateUserTaskTest" basedir="." xmlns:sf="com.mcartoixa.ant.sf">
   <condition property="sf-path" value="..\..\sf.cmd" else="../../sf">
     <os family="dos" />
   </condition>
@@ -10,12 +10,12 @@
   </target>
 
   <target name="execute" depends="init">
-    <sf:data-create-record targetorg="testorganization" sobject="Test" statusproperty="execute.status" resultproperty="execute.result" referenceproperty="execute.reference" executable="${sf-path}">
-      <field name="FieldName" value="fieldValue" />
-    </sf:data-create-record>
+    <sf:org-create-user targetorg="testorganization" statusproperty="execute.status" resultproperty="execute.result" referenceproperty="execute.reference" executable="${sf-path}">
+      <param name="ParamName" value="paramValue" />
+    </sf:org-create-user>
   </target>
 
   <target name="execute-quiet" depends="init">
-    <sf:data-create-record quiet="true" executable="${sf-path}" />
+    <sf:org-create-user quiet="true" executable="${sf-path}" />
   </target>
 </project>

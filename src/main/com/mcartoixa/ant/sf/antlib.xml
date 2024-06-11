@@ -5,6 +5,7 @@
   <taskdef name="data-create-record" classname="com.mcartoixa.ant.sf.data.create.CreateRecordTask" />
   <taskdef name="data-import-tree" classname="com.mcartoixa.ant.sf.data.imp.ImportTreeTask" />
   <taskdef name="org-create-scratch" classname="com.mcartoixa.ant.sf.org.create.CreateScratchTask" />
+  <taskdef name="org-create-user" classname="com.mcartoixa.ant.sf.org.create.CreateUserTask" />
   <taskdef name="org-delete-scratch" classname="com.mcartoixa.ant.sf.org.delete.DeleteScratchTask" />
   <taskdef name="org-display" classname="com.mcartoixa.ant.sf.org.DisplayTask" />
   <taskdef name="org-list" classname="com.mcartoixa.ant.sf.org.ListTask" />

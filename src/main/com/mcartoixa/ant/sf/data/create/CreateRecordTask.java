@@ -45,7 +45,12 @@ public class CreateRecordTask extends SfTask {
                 final JSONObject result = json.getJSONObject("result");
                 if (result != null) {
                     if (result.getBoolean("success")) {
+                        final String id = result.getString("id");
                         this.log("Record " + result.getString("id") + " created", Project.MSG_INFO);
+                        final String refProperty = CreateRecordTask.this.getReferenceProperty();
+                        if (refProperty != null && !refProperty.isEmpty()) {
+                            CreateRecordTask.this.getProject().setNewProperty(refProperty, id);
+                        }
                     } else {
                         if (json.has("errors")) {
                             final JSONArray errors = json.getJSONArray("errors");
@@ -80,6 +85,10 @@ public class CreateRecordTask extends SfTask {
         final Property ret = new Property();
         this.fields.add(ret);
         return ret;
+    }
+
+    public void setReferenceProperty(final String refProperty) {
+        this.refProperty = refProperty;
     }
 
     public void setSObject(final String sObject) {
@@ -127,5 +136,11 @@ public class CreateRecordTask extends SfTask {
         return new CreateRecordTask.JsonParser();
     }
 
+    @SuppressWarnings("PMD.DefaultPackage")
+    /* default */ String getReferenceProperty() {
+        return this.refProperty;
+    }
+
     private final transient List<Property> fields = new ArrayList<>();
+    private transient String refProperty;
 }

@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+Copyright 2024 Mathieu Cartoixa.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us">
+  <head>
+    <title>org-create-user Task</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+  </head>
+
+  <body>
+    <h2>org-create-user Task</h2>
+
+    <h3>Description</h3>
+    <p>Create a user for a scratch org.</p>
+    <p>It executes the <a href="developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference_org_commands_unified.htm#cli_reference_org_create_user_unified" target="_blank">force:user:create</a> command.</p>
+
+    <h3>Parameters</h3>
+    <p>In addition to <a href="common.html">the attributes used by every ant-sf task</a>, this task uses the following attributes:</p>
+    <table class="attr">
+      <thead>
+        <tr>
+          <th scope="col">Attribute</th>
+          <th scope="col">Command line equivalent</th>
+          <th scope="col">Description</th>
+          <th scope="col">Required</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>alias</td>
+          <td>-a</td>
+          <td>An alias for the created username.</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>definitionfile</td>
+          <td>-f</td>
+          <td>A user definition file.</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>targetorg</td>
+          <td>-u</td>
+          <td>A username or alias for the target org.</td>
+          <td>No</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Parameters specified as nested elements</h3>
+    <h4>param</h4>
+    <p>Specifies parameters to be used for the user creation, sent as key=value pairs to the Salesforce DX CLI command. See <a href="https://ant.apache.org/manual/Tasks/property.html" target="_blank">property</a> for usage guidelines.</p>
+
+    <h3>Examples</h3>
+    <blockquote><pre>
+&lt;org-create-user /&gt;</pre></blockquote>
+    <blockquote><pre>
+&lt;org-create-user alias=&quot;testuser1&quot; definitionfile=&quot;config/project-user-def.json&quot; /&gt;</pre></blockquote>
+    <blockquote><pre>
+&lt;org-create-user&gt;
+    &lt;param name=&quot;username&quot; value=&quot;testuser1@my.org&quot; /&gt;
+    &lt;param name=&quot;email&quot; value=&quot;me@my.org&quot; /&gt;
+    &lt;param name=&quot;permsets&quot; value=&quot;DreamHouse&quot; /&gt;
+&lt;/org-create-user&gt;</pre></blockquote>
+    <blockquote><pre>
+&lt;org-create-user definitionfile=&quot;config/project-user-def.json&quot;&gt;
+    &lt;param name=&quot;email&quot; value=&quot;me@my.org&quot; /&gt;
+    &lt;param name=&quot;generatepassword&quot; value=&quot;true&quot; /&gt;
+&lt;/org-create-user&gt;</pre></blockquote>
+
+    <p class="center">Version: <span class="version-number">0.0.0-master</span></p>
+  </body>
+</html>
