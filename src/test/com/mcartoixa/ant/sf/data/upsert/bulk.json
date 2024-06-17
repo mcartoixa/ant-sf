@@ -21,7 +21,7 @@
     },
     "jobInfo":{
       "lineEnding":"CRLF",
-      "numberRecordsFailed":1,
+      "numberRecordsFailed":0,
       "externalIdFieldName":"Id",
       "numberRecordsProcessed":2,
       "systemModstamp":"2024-06-12T09:37:00.000+0000",

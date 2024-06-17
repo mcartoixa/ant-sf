@@ -18,6 +18,7 @@ package com.mcartoixa.ant.sf.data.upsert;
 import com.mcartoixa.ant.sf.ISfJsonParser;
 import com.mcartoixa.ant.sf.SfTask;
 import java.io.File;
+import java.util.Locale;
 import org.apache.tools.ant.Project;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -34,7 +35,7 @@ public class UpsertBulkTask extends SfTask {
             super();
         }
 
-        @SuppressWarnings("PMD.EmptyCatchBlock")
+        @SuppressWarnings({"PMD.CognitiveComplexity", "PMD.EmptyCatchBlock"})
         @Override
         protected void doParse(final JSONObject json) {
             if (!UpsertBulkTask.this.getQuiet()) {
@@ -42,6 +43,28 @@ public class UpsertBulkTask extends SfTask {
                 if (result != null) {
                     final JSONObject records = result.optJSONObject("records");
                     if (records != null) {
+                        final String refProperty = UpsertBulkTask.this.getReferencesProperty();
+                        if (refProperty != null && !refProperty.isEmpty()) {
+                            final JSONArray successfulResults = records.optJSONArray("successfulResults");
+                            if (successfulResults != null) {
+                                for (int i = 0; i < successfulResults.length(); i++) {
+                                    final Object value = successfulResults.get(i);
+                                    if (value instanceof JSONObject) {
+                                        final JSONObject sr = (JSONObject) value;
+                                        final String id = sr.optString("sf__Id");
+                                        if (id != null) {
+                                            final String refId = String.format(
+                                                "%sRef%d",
+                                                UpsertBulkTask.this.getSobject(),
+                                                i
+                                            );
+                                            UpsertBulkTask.this.getProject().setNewProperty(refProperty + "." + refId.toLowerCase(Locale.ROOT), id);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        
                         final JSONArray failedResults = records.optJSONArray("failedResults");
                         if (failedResults != null) {
                             for (int i = 0; i < failedResults.length(); i++) {
@@ -61,13 +84,22 @@ public class UpsertBulkTask extends SfTask {
                     if (jobInfo != null) {
                         this.log(
                             String.format(
-                                "%s records processed: %d, Failed: %d",
+                                "%s records processed: %d",
                                 UpsertBulkTask.this.getSobject(),
-                                jobInfo.optInt("numberRecordsProcessed", 0),
-                                jobInfo.optInt("numberRecordsFailed", 0)
+                                jobInfo.optInt("numberRecordsProcessed", 0)
                             ),
                             Project.MSG_INFO
                         );
+                        final int nrf = jobInfo.optInt("numberRecordsFailed", 0);
+                        if (nrf > 0) {
+                            this.setErrorMessage(
+                                String.format(
+                                    "%d %s record(s) failed",
+                                    nrf,
+                                    UpsertBulkTask.this.getSobject()
+                                )
+                            );
+                        }
                     }
                 }
             }
@@ -97,6 +129,10 @@ public class UpsertBulkTask extends SfTask {
             getCommandline().createArgument().setValue("--file");
             getCommandline().createArgument().setValue(file.getPath());
         }
+    }
+
+    public void setReferencesProperty(final String refProperty) {
+        this.refProperty = refProperty;
     }
 
     public void setSobject(final String sobject) {
@@ -134,6 +170,12 @@ public class UpsertBulkTask extends SfTask {
     /* default */ String getSobject() {
         return this.sobject;
     }
-    
+
+    @SuppressWarnings("PMD.DefaultPackage")
+    /* default */ String getReferencesProperty() {
+        return this.refProperty;
+    }
+
+    private transient String refProperty;
     private transient String sobject;
 }

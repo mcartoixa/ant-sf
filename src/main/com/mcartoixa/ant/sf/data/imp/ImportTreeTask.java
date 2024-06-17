@@ -16,6 +16,7 @@
 package com.mcartoixa.ant.sf.data.imp;
 
 import com.mcartoixa.ant.sf.ISfJsonParser;
+import com.mcartoixa.ant.sf.Phase;
 import com.mcartoixa.ant.sf.SfTask;
 import java.io.File;
 import java.io.IOException;
@@ -67,13 +68,20 @@ public class ImportTreeTask extends SfTask {
                         }
 
                         final String message = String.format(
-                                "%s imported (%s).",
+                                "%s imported (%s)",
                                 refId,
                                 id
                         );
                         this.log(message, Project.MSG_VERBOSE);
                     }
                 }
+                this.log(
+                    String.format(
+                        "Records processed: %d",
+                        result.length()
+                    ),
+                    Project.MSG_INFO
+                );
             }
 
             final String errorMessage = json.optString("message");
@@ -137,9 +145,17 @@ public class ImportTreeTask extends SfTask {
         super.checkConfiguration();
     }
 
+    @SuppressWarnings("PMD.OnlyOneReturn")
     @Override
     protected String[] getCommand() {
-        return new String[] { "data", "import", "tree" };
+        switch (this.phase) {
+            case Beta:
+                return new String[] { "data", "import", "beta", "tree" };
+            case Legacy:
+                return new String[] { "data", "import", "legacy", "tree" };
+            default:
+                return new String[] { "data", "import", "tree" };
+        }
     }
 
     public void addFileset(final FileSet set) {
@@ -151,6 +167,10 @@ public class ImportTreeTask extends SfTask {
             this.resources = new Union();
         }
         this.resources.add(list);
+    }
+
+    public void setPhase(final Phase phase) {
+        this.phase = phase;
     }
 
     public void setPlan(final File plan) {
@@ -231,6 +251,7 @@ public class ImportTreeTask extends SfTask {
 
     private transient final List<FileSet> fileSets = new ArrayList<>();
     private transient File plan;
+    private transient Phase phase = Phase.Current;
     private transient String refProperty;
     private transient Union resources = null;
 }

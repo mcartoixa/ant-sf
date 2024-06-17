@@ -90,7 +90,7 @@ public class StartTask extends SfTask {
                         String.format(
                             "Components deployed: %d, Failed: %d",
                             result.optInt("numberComponentsDeployed", 0),
-                            result.optInt("numberComponentsFailed", 0)
+                            result.optInt("numberComponentErrors", 0) + result.optInt("numberComponentsFailed", 0)
                         ),
                         Project.MSG_INFO
                     );
