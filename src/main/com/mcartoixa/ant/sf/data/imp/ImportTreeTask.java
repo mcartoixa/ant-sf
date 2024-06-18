@@ -149,9 +149,9 @@ public class ImportTreeTask extends SfTask {
     @Override
     protected String[] getCommand() {
         switch (this.phase) {
-            case Beta:
+            case beta:
                 return new String[] { "data", "import", "beta", "tree" };
-            case Legacy:
+            case legacy:
                 return new String[] { "data", "import", "legacy", "tree" };
             default:
                 return new String[] { "data", "import", "tree" };
@@ -251,7 +251,7 @@ public class ImportTreeTask extends SfTask {
 
     private transient final List<FileSet> fileSets = new ArrayList<>();
     private transient File plan;
-    private transient Phase phase = Phase.Current;
+    private transient Phase phase = Phase.current;
     private transient String refProperty;
     private transient Union resources = null;
 }

@@ -13,15 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mcartoixa.ant.sf;
+package com.mcartoixa.ant.sf.org.generate;
 
 /**
  *
  * @author Mathieu Cartoixa
  */
-@SuppressWarnings("PMD.FieldNamingConventions")
-public enum Phase {
-    beta,
-    current,
-    legacy
+public class UsernameWrapper {
+
+    public UsernameWrapper() {
+    }
+
+    public final void addText(final String text) {
+        this.name = text;
+    }
+
+    public final String getName() {
+        return this.name;
+    }
+
+    private transient String name;
 }

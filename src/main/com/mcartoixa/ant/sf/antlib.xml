@@ -8,6 +8,7 @@
   <taskdef name="org-create-scratch" classname="com.mcartoixa.ant.sf.org.create.CreateScratchTask" />
   <taskdef name="org-create-user" classname="com.mcartoixa.ant.sf.org.create.CreateUserTask" />
   <taskdef name="org-delete-scratch" classname="com.mcartoixa.ant.sf.org.delete.DeleteScratchTask" />
+  <taskdef name="org-generate-password" classname="com.mcartoixa.ant.sf.org.generate.GeneratePasswordTask" />
   <taskdef name="org-display" classname="com.mcartoixa.ant.sf.org.DisplayTask" />
   <taskdef name="org-list" classname="com.mcartoixa.ant.sf.org.ListTask" />
   <taskdef name="org-list-metadatatypes" classname="com.mcartoixa.ant.sf.org.list.ListMetadataTypesTask" />

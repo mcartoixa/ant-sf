@@ -40,20 +40,20 @@ public class CreateUserTask extends SfTask {
         protected void handleValue(final String property, final String key, final String value) {
             super.handleValue(property, key, value);
 
-            if (!CreateUserTask.this.getQuiet()) {
-                switch (key) {
-                    case "id":
-                        final String refProperty = CreateUserTask.this.getReferenceProperty();
-                        if (refProperty != null && !refProperty.isEmpty()) {
-                            CreateUserTask.this.getProject().setNewProperty(refProperty, value);
-                        }
-                        break;
-                    case "username":
+            switch (key) {
+                case "id":
+                    final String refProperty = CreateUserTask.this.getReferenceProperty();
+                    if (refProperty != null && !refProperty.isEmpty()) {
+                        CreateUserTask.this.getProject().setNewProperty(refProperty, value);
+                    }
+                    break;
+                case "username":
+                    if (!CreateUserTask.this.getQuiet()) {
                         this.log("User " + value + " created", Project.MSG_INFO);
-                        break;
-                    default:
-                        break;
-                }
+                    }
+                    break;
+                default:
+                    break;
             }
         }
     }
